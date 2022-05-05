@@ -1,0 +1,10 @@
+env
+_env
+db.sqlite3
+_restos
+_restos/
+.env
+/__pycache__
+__pycache__
+/migrations
+.vscode

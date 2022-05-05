@@ -1,0 +1,101 @@
+
+{% load static %} 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>autenticar</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+</head>
+
+
+<style>
+		
+    html{
+        background-color:rgb(195, 238, 187);
+    }
+    input{
+        font-size: 35px;
+    }
+    label{
+        font-size: 35px;
+    }
+    .link{
+        margin: 10% 0% 0% 10%;
+        font-size: 25px;
+    } 
+</style>
+
+
+
+<body>
+
+    {% if user.is_authenticated %}
+
+        <div class='link'>
+            {{user.username|safe}}          
+        </div>
+        <hr/>
+
+        <div class='link'> 
+            <a href="/autenticar/usuario_informacoes/">Informações do Usuário</a>
+        </div>
+        <hr/>
+
+        <div class='link'> 
+            <a href="/autenticar/senha_mudar/">Mudar Senha</a>
+        </div>
+        <hr/>
+
+        <div class='link'> 
+            <a href="/autenticar/senha_resetar/">resetar senha</a>
+        </div>
+        <hr/>
+    {% endif %}
+
+
+
+    <div class='link'> 
+        <a href="/autenticar/usuario_criar/">Criar Usuário</a>
+    </div>
+    <hr/>
+
+    <div class='link'> 
+        <a href="/autenticar/logar/">Logar</a>
+    </div>
+    <hr/>
+
+    <div class='link'> 
+        <a href="/autenticar/deslogar/">Deslogar</a>
+    </div>
+    <hr/>
+
+
+    {% comment %}
+    <div class='link'> 
+        <a href="/autenticar/addemail/">addemail</a>
+    </div>
+    <hr/>
+
+
+    <div class='link'> 
+        <a href="/autenticar/setpassword/">setpassword</a>
+    </div>
+    <hr/>
+
+    <div class='link'> 
+        <a href="/autenticar/passwordreset/">passwordreset</a>
+    </div>
+    <hr/>
+
+    <div class='link'> 
+        <a href="/autenticar/resetpasswordkey">resetpasswordkey</a>
+    </div>
+    <hr/>
+    {% endcomment %}
+
+
+</body>
+
+</html>
