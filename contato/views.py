@@ -19,7 +19,7 @@ from .forms import *
 import random
 
 
-from meusite.settings import *
+from meu_site.settings import *
 from operator import itemgetter
 from json2html import *
 from django.http import QueryDict
@@ -29,20 +29,23 @@ from .forms import *
 from django.views import View
 
 
+def contato_opcoes_view(request):
+	return render(request, 'contato/contato_opcoes.html')
 
-def contatoview(request):
+
+def contato_view(request):
 	if request.method == 'POST':
 		form = ContatoForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/contato/enviado')
+			return HttpResponseRedirect('/contato/enviado/')
 		
 	else:
 		form = ContatoForm()
 	return render(request, 'contato/contato.html', {'form': form})
 
 
-def contatoenviadoview(request):
+def contato_enviado_view(request):
 	if request.method == 'POST':	
 		form = ContatoForm(request.POST)
 		if form.is_valid():

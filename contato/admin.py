@@ -1,6 +1,5 @@
 
 from django.contrib import admin
-from dadoscarregar.models import *
 from .models import *
 
 

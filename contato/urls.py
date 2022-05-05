@@ -6,7 +6,8 @@ from . import views
 app_name = 'contato'
 urlpatterns = [
 
-	path('', views.contatoview, name="contato"),
-	path('enviado', views.contatoenviadoview, name="contatoenviado")
+	path('opcoes/', views.contato_opcoes_view, name="opcoes"),
+	path('', views.contato_view, name="contato"),
+	path('enviado/', views.contato_enviado_view, name="contato_enviado")
 
 ]

@@ -101,71 +101,26 @@ def senha_resetar_view(request):
 
 
 def usuario_informacoes_view(request):
-	responsee = HttpResponse("Cookie Set")
-	responsee.set_cookie('oi', 'oioi', 300000)
-	responsee.set_cookie('flamengo', 'FLAMENGO', 100000)
+
+	resposta = HttpResponse("Cookie Set")
+	resposta.set_cookie('set_cookie', 'set_cookie', 300000)
 	try:
-		r1  = request.COOKIES['flamengo'] 
-		r2  = request.COOKIES['oi']
-		r3 = ' '
-		response = r1+r3+r2
+		response  = request.COOKIES['set_cookie'] 
 	except:
-		r1 = ''
-		r2 = ''
-		r3 = ''
-		response = r1+r3+r2
+		response = 'set_cookie'
 
 	data = request.session.get('data', datetime.now())
-	request.session['data'] = f'{data} {datetime.now()}'
-
-	num_visits01 = request.session.get('num_visits1', 0)
-	request.session['num_visits01'] = num_visits01 + 1
-	num_visits02 = request.session.get_expiry_age()
-	num_visits03 = request.session.get_expiry_date()
-	num_visits04 = request.session.get_expire_at_browser_close()
-	num_visits05 = str(request.session)
-	num_visits06 = request.session.session_key
-	num_visits07 = request.session.items()
-	num_visits08 = request.session.keys()
-	num_visits09 = request.session.get_session_cookie_age()
-	num_visits10 = request.session.get_expire_at_browser_close()
-	
-	sessao = f'\
-		<br>01: {num_visits01}    <br>02: {num_visits02}    \
-		<br>03: {num_visits03}    <br>04: {num_visits04}    \
-		<br>05: {num_visits05}    <br>06: {num_visits06}    \
-		<br>07: {num_visits07}    <br>08: {num_visits08}    \
-		<br>09: {num_visits09}    <br>10: {num_visits10}    \
-		<br>response: {response}  <br>data: {data}'
-
-
-
-
-	usuarios = str(
-		serializers.serialize(
-			'json',User.objects.all())).replace(
-				'", "','"<br>"').replace(
-					'"pk"','<br><br>"pk"')
-	
-	dados1 = (str(request.META)).replace("', '","'<br>'")
-	dados2 = (str(User.objects.all().values())).replace("', '","'<br>'")
-	dados3 = User._meta.get_fields(include_hidden=True)
-
-	info = str(User.objects.filter(username = request.user).values())
+	request.session['data'] = f'{data}<br> {datetime.now()}'
+	visitas_quantidade = request.session.get('visitas_quantidade', 1)
+	request.session['visitas_quantidade'] = visitas_quantidade + 1
 	
 	return render(
 		request, 
 		'autenticar/usuario_informacoes.html',
 		{
-			"dados1": dados1,
-			'dados2': dados2,
-			'usuarios': usuarios,
-			'num_visits1': num_visits01,
+			'visitas_quantidade': visitas_quantidade,
 			'data': data,
-			'sessao': sessao,
-			'info': info,
-			'dados3': dados3
 		}
 	)
-	return responsee
+	return resposta
 

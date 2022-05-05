@@ -21,7 +21,6 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 """
     'rede_social.apps.RedeSocialConfig',
     'testes.apps.TestesConfig',
-    'contato.apps.ContatoConfig',
 """
 
 INSTALLED_APPS = [
@@ -34,48 +33,11 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.sites',
 
-
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-
-
-    'administrar.apps.AdministrarConfig',
-    'texto_dados.apps.TextosDadosConfig', 
-    'artigo03.apps.ArtigoConfig',
     'autenticar.apps.AutenticarConfig',
-    'jogo_ingles_portugues.apps.Jogo_ingles_portuguesConfig',
-    'jogo_ingles_portugues_dados_carregar.apps.Jogo_ingles_portugues_dados_carregarConfig',
-
+    'contato.apps.ContatoConfig',
 ]
 
 
-# Additional configuration settings
-SOCIALACCOUNT_QUERY_EMAIL = True
-ACCOUNT_LOGOUT_ON_GET= True
-ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
-# Provider specific settings
-
-
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'APP': {
-            'client_id': config('CLIENT_ID'),
-            'secret': config('SECRET'),
-            'key':''
-        },
-        'REGION': 'br',
-    }
-}
-
-
-SOCIALACCOUNT_FORMS = {
-    'disconnect': 'allauth.socialaccount.forms.DisconnectForm',
-    'signup': 'allauth.socialaccount.forms.SignupForm',
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -95,9 +57,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'meu_site/templates'),
-            os.path.join(BASE_DIR, 'administrar/templates'),
-            os.path.join(BASE_DIR, 'artigo03/templates'),
-            os.path.join(BASE_DIR, 'texto_dados/templates'),
+            os.path.join(BASE_DIR, 'contato/templates'),
+            os.path.join(BASE_DIR, 'autenticar/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -156,19 +117,13 @@ USE_TZ = True
 
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'midias/')
-MEDIA_URL = ''
-
-#MEDIAFILES_DIRS = [os.path.join(BASE_DIR, 'imagem')]
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 STATIC_URL = ''
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'meu_site/static'),
-    os.path.join(BASE_DIR, 'administrar/static'),
-    os.path.join(BASE_DIR, 'artigo03/static'),
-    os.path.join(BASE_DIR, 'texto_dados/static')
+    os.path.join(BASE_DIR, 'contato/static'),
+    os.path.join(BASE_DIR, 'autenticar/static'),
 ] 
-#[os.path.join(BASE_DIR, 'static_in_env')]
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 

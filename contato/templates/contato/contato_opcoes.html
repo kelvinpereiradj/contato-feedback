@@ -2,11 +2,10 @@
 {% load static %} 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-	<title>sem título</title>
+	<title>contato</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 </head>
 
@@ -15,7 +14,6 @@
 		
     html{
         background-color:rgb(195, 238, 187);
-        font-size: 25px;
     }
     input{
         font-size: 35px;
@@ -24,7 +22,8 @@
         font-size: 35px;
     }
     .link{
-        margin: 2% 0% 0% 10%;
+        margin: 10% 0% 0% 10%;
+        font-size: 25px;
     } 
 </style>
 
@@ -32,22 +31,20 @@
 
 <body>
 
-    <div class='link'>
-        Usuário: {{user}}          
+    <div class='link'> 
+        <a href="/contato/opcoes/">opcoes</a>
     </div>
     <hr/>
 
-
-    <div class='link'>
-        Visitas: {{visitas_quantidade}}          
+    <div class='link'> 
+        <a href="/contato/">contato</a>
     </div>
-    <hr/> 
+    <hr/>
 
-
-    <div class='link'>
-        {{data|safe}}          
+    <div class='link'> 
+        <a href="/contato/enviado/">enviado</a>
     </div>
-    <hr/> 
+    <hr/>
 
 
 </body>

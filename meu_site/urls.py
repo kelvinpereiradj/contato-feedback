@@ -12,88 +12,11 @@ from . import views
   
 """
 
-urlpatterns = [
-    path(
-        'admin/', 
-        admin.site.urls
-    ),
-
-
-    path(
-        'texto_dados/', 
-        include(
-            'texto_dados.urls', 
-            namespace='texto_dados'
-        )
-    ),
-
-
-    path(
-        'administrar/', 
-        include(
-            'administrar.urls', 
-            namespace = 'administrar'
-        )
-    ),
-
- 
-    path(
-        '', 
-        views.pagina_inicial_views, 
-        name = "inicial"
-    ),
-
-
-    path(
-        'autenticar/', 
-        include(
-            'autenticar.urls', 
-            namespace = 'autenticar'
-        )
-    ),
-
-
-    path(
-        'accounts/', 
-        include('allauth.urls')
-    ),
-
-
-    path(
-        'artigo/', 
-        include(
-            'artigo03.urls', 
-            namespace = 'artigo'
-        )
-    ),
-
-
-    path(
-        'jogo_ingles_portugues/', 
-        include(
-            'jogo_ingles_portugues.urls', 
-            namespace = 'jogo'
-        )
-    ),
-
-
-    path(
-        'jogo_ingles_portugues_dados_carregar/', 
-        include(
-            'jogo_ingles_portugues_dados_carregar.urls', 
-            namespace = 'jogo_ingles_portugues_dados_carregar'
-        )
-    ),
- 
+urlpatterns = [ 
+    path('', views.pagina_inicial_views, name = "inicial"),
+    path('admin/', admin.site.urls),
+    path('autenticar/', include('autenticar.urls', namespace='autenticar')),
+    path('contato/', include('contato.urls', namespace = 'contato')),
 
 ]
 
-
-from django.conf import settings
-from django.conf.urls.static import static
-
-if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL, 
-        document_root=settings.MEDIA_ROOT
-    )
