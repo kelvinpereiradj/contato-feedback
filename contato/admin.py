@@ -10,7 +10,15 @@ class ContatoAdmin(admin.ModelAdmin):
     actions = []
     search_fields = list_display
     list_per_page = 500
-
-
-
 admin.site.register(Contato, ContatoAdmin)
+
+
+
+class UsuarioMensagensAdmin(admin.ModelAdmin):
+    model = UsuarioMensagens
+    list_display = usuario_mensagens_list_display
+    ordering = ['pk']
+    actions = []
+    search_fields = list_display
+    list_per_page = 500
+admin.site.register(UsuarioMensagens, UsuarioMensagensAdmin)

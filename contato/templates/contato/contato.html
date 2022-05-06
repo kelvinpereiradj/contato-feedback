@@ -2,29 +2,33 @@
 {% block estilo %}
 
 	<style>
-	input, textarea{
-    float: left;
-    width: 100%;
-    margin: 0% 0% 2% 0%;
-	padding:0%;
-}
-.mensagem{
-    float: left;
-    width: 90%;
-    margin: 0% 0% 5% 5%;
-	padding:0%;
-	background-color:rgb(26, 230, 206);
-}
-	.contato_html{
+		.link{
+			margin: 10% 0% 0% 10%;
+			font-size: 25px;
+		} 
+		input, textarea{
 		float: left;
-		width: 50%;
-		font-size: 150%;
-		border: 7px solid #000000;
-		text-align: center;
-		color:rgb(15, 15, 1);
-		background-color:rgb(163, 236, 227);
-		margin: 10% 0% 0% 25%;
-	}
+		width: 100%;
+		margin: 0% 0% 2% 0%;
+		padding:0%;
+		}
+		.mensagem{
+			float: left;
+			width: 90%;
+			margin: 0% 0% 5% 5%;
+			padding:0%;
+			background-color:rgb(26, 230, 206);
+		}
+		.contato_html{
+			float: left;
+			width: 50%;
+			font-size: 150%;
+			border: 7px solid #000000;
+			text-align: center;
+			color:rgb(15, 15, 1);
+			background-color:rgb(163, 236, 227);
+			margin: 10% 0% 0% 25%;
+		}
 	</style>
 
 {% endblock estilo %}
@@ -36,42 +40,74 @@
 
 {% block conteudo %}
 
-	<div class="contato_html">
-		<div class = 'mensagem'>{{mensagem}}</div>
-		<form  method="post">
 
-			{% csrf_token %}
-			<div class="form-row field-contato_autor">				
-				<label for="id_contato_autor">Nome:</label>			
-					<input type="text" name="contato_autor" 
-					class="vTextField" maxlength="100" 
-					id="id_contato_autor">									
-			</div>
-			
-	
-			<div class="form-row field-contato_assunto">
-				<label for="id_contato_assunto">Assunto:</label>
-					<input type="text" name="contato_assunto" 
-					class="vTextField" maxlength="100" 
-					id="id_contato_assunto">					
-			</div>
-					
-			
-			<div class="form-row field-contato_mensagem">
-				<label class="required" 
-				for="id_contato_mensagem">Sua mensagem:</label>
+	{% if user.is_authenticated %}
+		<div class='link'> 
+			<a href="/autenticar/opcoes/">opções de autenticação</a>
+		</div>
+		<hr/>
+		<div class='link'>
+			{{user.username|safe}}          
+		</div>
+		<hr/>
+		
+		<div class='formulario'>          
+			<form  method="post">
+				{% csrf_token %}
+				{{form.as_p}}
+				<div class="submeter">
+					<input type="submit" value="enviar"><br>
+				</div>
+			</form>    
+		</div>
+		<hr/>
+		
+		{%comment%}
+		<div class="contato_html">
+			<div class = 'mensagem'>{{mensagem}}</div>
+			<form  method="post">
 
-					<textarea name="contato_mensagem" 
-					cols="40" rows="10" class="vLargeTextField" 
-					maxlength="2000" required="" 
-					id="id_contato_mensagem"></textarea>							
-			</div>
+				{% csrf_token %}
+				<div class="form-row field-contato_autor">				
+					<label for="id_contato_autor">Nome:</label>			
+						<input type="text" name="contato_autor" 
+						class="vTextField" maxlength="100" 
+						id="id_contato_autor">									
+				</div>
+				
+		
+				<div class="form-row field-contato_assunto">
+					<label for="id_contato_assunto">Assunto:</label>
+						<input type="text" name="contato_assunto" 
+						class="vTextField" maxlength="100" 
+						id="id_contato_assunto">					
+				</div>
+						
+				
+				<div class="form-row field-contato_mensagem">
+					<label class="required" 
+					for="id_contato_mensagem">Sua mensagem:</label>
 
-			<div class="submeter">
-				<input type="submit" value="enviar">
-			</div>
+						<textarea name="contato_mensagem" 
+						cols="40" rows="10" class="vLargeTextField" 
+						maxlength="2000" required="" 
+						id="id_contato_mensagem"></textarea>							
+				</div>
 
-		</form>
-	</div>	
+				<div class="submeter">
+					<input type="submit" value="enviar">
+				</div>
+
+			</form>
+		</div>
+	{%endcomment%}
+	{%else%}
+		<p class="link">Você precisa estatar autenticado para mandar mensagens!</p>
+		<div class='link'> 
+			<a href="/autenticar/opcoes/">opções de autenticação</a>
+		</div>
+		<hr/>
+		
+	{% endif %}
 
 {% endblock conteudo %}  

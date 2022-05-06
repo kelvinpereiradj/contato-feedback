@@ -26,31 +26,78 @@ from django.http import QueryDict
 from django.shortcuts import render
 from django.http import JsonResponse
 from .forms import *
+from .models import *
 from django.views import View
+
+
+
+
+
+
+def usuario_mensagem(request):		
+	modelo = Contato(
+		contato_autor = request.POST['contato_autor'],
+		contato_assunto = request.POST['contato_assunto'],
+		contato_mensagem = request.POST['contato_mensagem'],
+	)
+	modelo.save()
+	mensagem = Contato.objects.get(pk = modelo.pk)
+	obj, created = UsuarioMensagens.objects.get_or_create(
+		usuario = request.user
+	)
+	obj.usuario_mensagens.add(mensagem)	
+
 
 
 def contato_opcoes_view(request):
 	return render(request, 'contato/contato_opcoes.html')
 
 
+
 def contato_view(request):
 	if request.method == 'POST':
 		form = ContatoForm(request.POST)
 		if form.is_valid():
-			form.save()
+			usuario_mensagem(request)
 			return HttpResponseRedirect('/contato/enviado/')
-		
+		else:
+			return HttpResponseRedirect('/contato/nao_enviado/')		
 	else:
 		form = ContatoForm()
 	return render(request, 'contato/contato.html', {'form': form})
+
 
 
 def contato_enviado_view(request):
 	if request.method == 'POST':	
 		form = ContatoForm(request.POST)
 		if form.is_valid():
-			form.save()
+			usuario_mensagem(request)
 			return HttpResponseRedirect('/contato/enviado')
+		else:
+			return HttpResponseRedirect('/contato/nao_enviado/')
+	else:	
+		form = ContatoForm()
+	return render(
+		request, 
+		'contato/contato.html', 
+		{'form': form,'mensagem':'enviado'}
+	)
+
+
+
+def contato_nao_enviado_view(request):
+	if request.method == 'POST':	
+		form = ContatoForm(request.POST)
+		if form.is_valid():
+			usuario_mensagem(request)
+			return HttpResponseRedirect('/contato/enviado')
+		else:
+			return HttpResponseRedirect('/contato/nao_enviado/')
 	else:
 		form = ContatoForm()
-	return render(request, 'contato/contato.html', {'form': form,'mensagem':'enviado'})
+	return render(
+		request, 
+		'contato/contato.html', 
+		{'form': form,'mensagem':'não enviado'}
+	)
